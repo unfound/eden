@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import CanvasRenderer from './renderers/canvas'
 import Rect from './shapes/rect'
+import Text from './shapes/text'
 import Shape from './shapes/shape'
 
 export interface EdenOptions {
@@ -46,9 +47,27 @@ export default class Eden {
         }
     }
 
-    createRect (x: number, y: number, width: number, height: number, radius?: number) {
+    rect (x: number, y: number, width: number, height: number, radius?: number) {
         const rect = new Rect(x, y, width, height, radius)
         this.scene.push(rect)
         return rect
+    }
+
+    text (str: string, x: number, y: number, maxWidth?: number) {
+        const text = new Text(str, x, y, maxWidth)
+        this.scene.push(text)
+        return text
+    }
+
+    measureText (str: string, text?: Text) {
+        const ctx = this.renderer?.ctx
+        let metrics: TextMetrics | undefined
+        if (ctx) {
+            ctx.save()
+            text && text.updateTextContext(ctx)
+            metrics = ctx.measureText(str)
+            ctx.restore()
+        }
+        return metrics
     }
 }

@@ -21,4 +21,13 @@ export const DEFAULT_CTX = {
     shadowBlur: 0,
     shadowColor: NO_COLOR,
     fillRule: 'nonzero',
+    font: '10px sans-serif',
+    textAlign: 'start',
+    textBaseline: 'alphabetic',
+    direction: 'inherit',
+    fontSize: 14,
+    fontFamily: 'sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    lineHeight: 16
 }
