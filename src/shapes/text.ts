@@ -22,12 +22,12 @@ export default class Text extends Shape {
     }
 
     draw (ctx: CanvasRenderingContext2D) {
+        if (!this.visable) return
         ctx.save()
         this.updateContext(ctx)
         this.updateTextContext(ctx)
-        ctx.fillText(this.value, this.x, this.y, this.maxWidth)
-        ctx.strokeText(this.value, this.x, this.y, this.maxWidth)
-        console.log(ctx.measureText(this.value))
+        this.isFill && ctx.fillText(this.value, this.x, this.y, this.maxWidth)
+        this.isStroke && ctx.strokeText(this.value, this.x, this.y, this.maxWidth)
         ctx.restore()
     }
 
@@ -45,7 +45,6 @@ export default class Text extends Shape {
                 `${this.size}px/${this.lineHeight}px`,
                 this.family
             ].filter(item => !!item).join(' ')
-            console.log(ctx.font)
         }
     }
 

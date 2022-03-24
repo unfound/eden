@@ -1,11 +1,13 @@
 import Shape from "./shape"
-import { TWO_PI } from '../constants'
 
-export default class Circle extends Shape {
+export default class Arc extends Shape {
     constructor (
         public x: number,
         public y: number,
-        public radius: number
+        public radius: number,
+        public startAngle: number,
+        public endAngle: number,
+        public counterclockwise?: boolean
     ) {
         super()
     }
@@ -16,8 +18,7 @@ export default class Circle extends Shape {
         this.updateContext(ctx)
         ctx.beginPath()
         ctx.moveTo(this.x + this.radius, this.y)
-        ctx.arc(this.x, this.y, this.radius, 0, TWO_PI)
-        ctx.closePath()
+        ctx.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, this.counterclockwise)
         this.isFill && ctx.fill()
         this.isStroke && ctx.stroke()
         ctx.restore()

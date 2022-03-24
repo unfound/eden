@@ -1,10 +1,12 @@
 import _ from 'lodash'
 import CanvasRenderer from './renderers/canvas'
+import Shape from './shapes/shape'
 import Rect from './shapes/rect'
 import Text from './shapes/text'
-import Shape from './shapes/shape'
 import Circle from './shapes/circle'
 import Ellipse from './shapes/ellipse'
+import Arc from './shapes/arc'
+import Path from './shapes/path'
 
 export interface EdenOptions {
     el?: string | Element | null
@@ -83,5 +85,17 @@ export default class Eden {
         const ellipse = new Ellipse(ox, oy, rx, ry)
         this.scene.push(ellipse)
         return ellipse
+    }
+
+    arc (x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean | undefined) {
+        const arc = new Arc(x, y, radius, startAngle, endAngle, counterclockwise)
+        this.scene.push(arc)
+        return arc
+    }
+
+    path (path?: string | Path2D) {
+        const p = new Path(path)
+        this.scene.push(p)
+        return p
     }
 }

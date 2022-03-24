@@ -12,6 +12,7 @@ export default class Rect extends Shape {
     }
 
     draw (ctx: CanvasRenderingContext2D) {
+        if (!this.visable) return
         ctx.save()
         this.updateContext(ctx)
         this.drawByPath(ctx, this.x, this.y, this.width, this.height, this.radius)
@@ -25,8 +26,8 @@ export default class Rect extends Shape {
         width: number = 1,
         height: number = 1
     ) {
-        ctx.fillRect(x, y, width, height)
-        ctx.strokeRect(x, y, width, height)
+        this.isFill && ctx.fillRect(x, y, width, height)
+        this.isStroke && ctx.strokeRect(x, y, width, height)
     }
 
     drawByPath (
@@ -51,8 +52,8 @@ export default class Rect extends Shape {
         // 如果没有闭合，左上角会有个缺口lineWidth比较大的情况下很明显
         ctx.closePath()
         // 先fill在stroke，不然部分stroke会被覆盖
-        ctx.fill()
-        ctx.stroke()
+        this.isFill && ctx.fill()
+        this.isStroke && ctx.stroke()
     }
     // 不知道怎么设置圆弧
     drawByPath2D (
@@ -64,6 +65,7 @@ export default class Rect extends Shape {
     ) {
         const p = new Path2D()
         p.rect(x, y, width, height)
-        ctx.stroke(p)
+        this.isFill && ctx.fill(p)
+        this.isStroke && ctx.stroke(p)
     }
 }

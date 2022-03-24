@@ -12,6 +12,7 @@ export default class Ellipse extends Shape {
     }
 
     draw (ctx: CanvasRenderingContext2D) {
+        if (!this.visable) return
         ctx.save()
         this.updateContext(ctx)
         this.drawByCtx(ctx)
@@ -24,7 +25,7 @@ export default class Ellipse extends Shape {
         ctx.moveTo(this.x + this.radiusX, this.y)
         ctx.ellipse(this.x, this.y, this.radiusX, this.radiusY, 0, 0, TWO_PI)
         ctx.closePath()
-        ctx.fill()
-        ctx.stroke()
+        this.isFill && ctx.fill()
+        this.isStroke && ctx.stroke()
     }
 }
