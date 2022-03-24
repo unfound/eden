@@ -3,6 +3,8 @@ import CanvasRenderer from './renderers/canvas'
 import Rect from './shapes/rect'
 import Text from './shapes/text'
 import Shape from './shapes/shape'
+import Circle from './shapes/circle'
+import Ellipse from './shapes/ellipse'
 
 export interface EdenOptions {
     el?: string | Element | null
@@ -60,7 +62,7 @@ export default class Eden {
     }
 
     measureText (str: string, text?: Text) {
-        const ctx = this.renderer?.ctx
+        const ctx = this.getContext()
         let metrics: TextMetrics | undefined
         if (ctx) {
             ctx.save()
@@ -69,5 +71,17 @@ export default class Eden {
             ctx.restore()
         }
         return metrics
+    }
+
+    circle (ox: number, oy: number, r: number) {
+        const circle = new Circle(ox, oy, r)
+        this.scene.push(circle)
+        return circle
+    }
+
+    ellipse (ox: number, oy: number, rx: number, ry: number) {
+        const ellipse = new Ellipse(ox, oy, rx, ry)
+        this.scene.push(ellipse)
+        return ellipse
     }
 }
