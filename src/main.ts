@@ -17,8 +17,8 @@ text.size = 18
 text.weight = 900
 text.lineHeight = 16
 text.style = 'italic'
-console.log(eden.measureText(text.value))
-console.log(eden.measureText(text.value, text))
+// console.log(eden.measureText(text.value))
+// console.log(eden.measureText(text.value, text))
 const text2 = eden.text('Good', 260, 60)
 text2.size = 22
 text2.noStroke('red')
@@ -29,11 +29,15 @@ circle.noFill()
 const ellipse = eden.ellipse(60, 60, 60, 30)
 ellipse.noFill()
 
-eden.path()
+const triangle = eden.path()
+triangle
   .moveTo(10, 150)
   .lineTo(100, 200)
   .lineTo(50, 250)
-  .closePath()
-  .fill()
+  .moveTo(40, 210)
+  .arc(40, 210, 20, 0, Math.PI * 2)
+  // .fill()
+  // triangle.path2d.moveTo(20, 300)
+  // triangle.path2d.roundRect(20, 300, 60, 60, 10) // chrome里是有这个方法的
 
 eden.update()
