@@ -1,5 +1,5 @@
-import Vector from './Vector'
-// const cos = Math.cos, sin = Math.sin, tan = Math.tan
+import Vector from './vector'
+const cos = Math.cos, sin = Math.sin, tan = Math.tan
 
 export class Matrix {
   elements: number[] = []
@@ -233,13 +233,88 @@ export class Matrix {
 
     return new Vector(newX, newY)
   }
+  /**
+   * 转置矩阵
+   * @param out 转置矩阵输出的对象，如果没有，则返回一个新矩阵
+   */
+  inverse (out?: Matrix) {
+    const a = this.elements
+    out = out || new Matrix()
+
+    const a00 = a[0], a01 = a[1], a02 = a[2]
+    const a10 = a[3], a11 = a[4], a12 = a[5]
+    const a20 = a[6], a21 = a[7], a22 = a[8]
+
+    const b01 = a22 * a11 - a12 * a21
+    const b11 = -a22 * a10 + a12 * a20
+    const b21 = a21 * a10 - a11 * a20
+
+    // Calculate the determinant
+    let det = a00 * b01 + a01 * b11 + a02 * b21
+
+    if (!det) {
+      return null
+    }
+
+    det = 1.0 / det
+
+    out.elements[0] = b01 * det
+    out.elements[1] = (-a22 * a01 + a02 * a21) * det
+    out.elements[2] = (a12 * a01 - a02 * a11) * det
+    out.elements[3] = b11 * det
+    out.elements[4] = (a22 * a00 - a02 * a20) * det
+    out.elements[5] = (-a12 * a00 + a02 * a10) * det
+    out.elements[6] = b21 * det
+    out.elements[7] = (-a21 * a00 + a01 * a20) * det
+    out.elements[8] = (a11 * a00 - a01 * a10) * det
+
+    return out
+  }
+
+  scale (sx: number, sy?: number) {
+    if (!sy) {
+      sy = sx
+    }
+
+    return this.multiply(sx, 0, 0, 0, sy, 0)
+  }
+
+  rotate (r: number) {
+    const c = cos(r)
+    const s = sin(r)
+
+    return this.multiply(c, -s, 0, s, c, 0)
+  }
+
+  translate (x: number, y: number) {
+    return this.multiply(1, 0, x, 0, 1, y)
+  }
+
+  skewX (r: number) {
+    const a = tan(r)
+    return this.multiply(1, a, 0, 0, 1, 0)
+  }
+
+  skewY (r: number) {
+    const a = tan(r)
+    return this.multiply(1, 0, 0, a, 1, 0)
+  }
+
+  skew (rx: number, ry?: number) {
+    if (!ry) {
+      ry = rx
+    }
+    const ax = tan(rx)
+    const ay = tan(ry)
+    return this.multiply(1, ax, 0, ay, 1, 0)
+  }
 }
 
-const m = new Matrix()
-m.multiply(1)
-m.multiply(2, 1)
-m.multiply(2, 1, 3)
-m.multiply(new Vector())
-m.multiply(new Matrix())
-m.multiply(1,2,3,4,5, 6)
-m.multiply(1,2,3,4,5,6,7,8,9)
+// const m = new Matrix()
+// m.multiply(1)
+// m.multiply(2, 1)
+// m.multiply(2, 1, 3)
+// m.multiply(new Vector())
+// m.multiply(new Matrix())
+// m.multiply(1,2,3,4,5, 6)
+// m.multiply(1,2,3,4,5,6,7,8,9)
