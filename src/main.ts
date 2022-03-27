@@ -1,10 +1,13 @@
 import './style.css'
 import Eden from './eden'
+import { PI } from './constants'
+import anime from 'animejs'
 
 const eden = new Eden({
   el: '#app',
   width: 800,
-  height: 400
+  height: 400,
+  overdraw: false
 })
 const rect1 = eden.rect(10, 10, 20, 20)
 rect1.strokeStyle = 'green'
@@ -39,5 +42,16 @@ triangle
   // .fill()
   // triangle.path2d.moveTo(20, 300)
   // triangle.path2d.roundRect(20, 300, 60, 60, 10) // chrome里是有这个方法的
-
-eden.update()
+let rotation = 0
+anime({
+  autoplay: true,
+  duration: Infinity,
+  update () {
+    if (rotation >= 1000 * PI) {
+      rotation = 0
+    }
+    rotation += PI / 30
+    rect2.rotate(rotation)
+    eden.update()
+  }
+})

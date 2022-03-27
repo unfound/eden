@@ -1,24 +1,36 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/animejs': ^3.1.4
   '@types/lodash': ^4.14.180
+  animejs: ^3.2.1
   lodash: ^4.17.21
   typescript: ^4.5.4
   vite: ^2.8.0
 
 dependencies:
+  animejs: 3.2.1
   lodash: 4.17.21
 
 devDependencies:
+  '@types/animejs': 3.1.4
   '@types/lodash': 4.14.180
   typescript: 4.6.2
   vite: 2.8.6
 
 packages:
 
+  /@types/animejs/3.1.4:
+    resolution: {integrity: sha512-WUjeFT2SXd6intfE6cg6eL1jk/JL88JqM2gC4WqO4iHLmbCvHUq6aoLK13lGpDWs4FtS2PHoYraJZ0dEx99Dyg==}
+    dev: true
+
   /@types/lodash/4.14.180:
     resolution: {integrity: sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==}
     dev: true
+
+  /animejs/3.2.1:
+    resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
+    dev: false
 
   /esbuild-android-64/0.14.27:
     resolution: {integrity: sha512-LuEd4uPuj/16Y8j6kqy3Z2E9vNY9logfq8Tq+oTE2PZVuNs3M1kj5Qd4O95ee66yDGb3isaOCV7sOLDwtMfGaQ==}
