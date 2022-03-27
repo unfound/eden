@@ -41,7 +41,7 @@ export default class Vector {
     }
 
     add (v: Vector): Vector
-    add (x: number): Vector
+    add (x: number, y?: number): Vector
     add (xOrV: Vector | number, y?: number)
     {
         if (xOrV instanceof Vector) {
@@ -58,7 +58,7 @@ export default class Vector {
     }
 
     sub (v: Vector): Vector
-    sub (x: number): Vector
+    sub (x: number, y?: number): Vector
     sub (xOrV: Vector | number, y?: number)
     {
         if (xOrV instanceof Vector) {
@@ -75,7 +75,7 @@ export default class Vector {
     }
     // 这里的乘法和除法不是向量的点积或叉积，仅仅是用来做数值运算的
     multiply (v: Vector): Vector
-    multiply (x: number): Vector
+    multiply (x: number, y?: number): Vector
     multiply (xOrV: Vector | number, y?: number)
     {
         if (xOrV instanceof Vector) {
@@ -92,7 +92,7 @@ export default class Vector {
     }
 
     divide (v: Vector): Vector
-    divide (x: number): Vector
+    divide (x: number, y?: number): Vector
     divide (xOrV: Vector | number, y?: number)
     {
         if (xOrV instanceof Vector) {

@@ -1,4 +1,6 @@
 import { DEFAULT_CTX } from '../constants'
+import { Matrix } from '../math/matrix'
+import Vector from '../math/vector'
 
 export default class Shape {
     fillStyle?: string
@@ -19,6 +21,22 @@ export default class Shape {
     isStroke: Boolean = true
     isFill: Boolean = false
     visable: Boolean = true
+    _matrix: Matrix = new Matrix()
+    _position: Vector = new Vector()
+    _origin: Vector = new Vector()
+    _rotation: number = 0
+    _scale: number | [number, number] = 1
+    _skewX: number = 0
+    _skewY: number = 0
+
+    constructor (x?:number, y?:number, ox?: number, oy?: number) {
+        if (x && y) {
+            this._position.set(x, y)
+        }
+        if (ox && oy) {
+            this._origin.set(ox, oy)
+        }
+    }
 
     // 参数使用下划线后不使用也不会有警告
     draw (_ctx: CanvasRenderingContext2D): unknown {
@@ -40,6 +58,69 @@ export default class Shape {
             ctx.setLineDash(this.lineDash ?? DEFAULT_CTX.lineDash)
             ctx.lineDashOffset = this.lineDashOffset ?? ctx.lineDashOffset
         }
+        this.updateMatrix()
+        const matrix = this._matrix.elements
+        ctx.transform(matrix[0], matrix[3], matrix[1],
+            matrix[4], matrix[2], matrix[5])
+    }
+
+    updateMatrix () {
+        // TODO: 这里更新矩阵有问题
+        // 应该是按照用户意愿来决定旋转、平移或者缩放
+        // 这里的顺序是平移、缩放、旋转、倾斜
+        this._matrix
+                .identity()
+                .translate(this._position.x, this._position.y)
+        if (this._scale !== 1) {
+            if (Array.isArray(this._scale)) {
+                this._matrix.scale(this._scale[0], this._scale[1])
+            } else {
+                this._matrix.scale(this._scale)
+            }
+        }
+
+        if (this._rotation !== 0) {
+            this._matrix
+                    .translate(this._origin.x, this._origin.y)
+                    .rotate(this._rotation)
+                    .translate(-this._origin.x, -this._origin.y)
+        }
+
+        if (this._skewX !== 0) {
+            this._matrix.skewX(this._skewX)
+        }
+
+        if (this._skewY !== 0) {
+            this._matrix.skewY(this._skewY)
+        }
+    }
+
+    rotate (r: number) {
+        this._rotation = r
+        return this
+    }
+    setOrigin (x: number, y: number) {
+        this._origin.set(x, y)
+    }
+
+    translate (x: number, y: number) {
+        this._position.add(x, y)
+        return this
+    }
+
+    scale (s: number | [number, number]) {
+        this._scale = s
+        return this
+    }
+
+    skewX (s: number) {
+        this._skewX = s
+        return this
+    }
+
+    skewY (s: number) {
+        this._skewY = s
+        return this
     }
 
     noStroke (fillColor?: string) {

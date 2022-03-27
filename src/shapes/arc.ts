@@ -9,7 +9,7 @@ export default class Arc extends Shape {
         public endAngle: number,
         public counterclockwise?: boolean
     ) {
-        super()
+        super(x, y, x, y)
     }
 
     draw (ctx: CanvasRenderingContext2D) {
@@ -17,8 +17,8 @@ export default class Arc extends Shape {
         ctx.save()
         this.updateContext(ctx)
         ctx.beginPath()
-        ctx.moveTo(this.x + this.radius, this.y)
-        ctx.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, this.counterclockwise)
+        ctx.moveTo(this.radius, 0)
+        ctx.arc(0, 0, this.radius, this.startAngle, this.endAngle, this.counterclockwise)
         this.isFill && ctx.fill()
         this.isStroke && ctx.stroke()
         ctx.restore()

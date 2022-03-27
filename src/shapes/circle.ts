@@ -7,7 +7,7 @@ export default class Circle extends Shape {
         public y: number,
         public radius: number
     ) {
-        super()
+        super(x, y, x, y)
     }
 
     draw (ctx: CanvasRenderingContext2D) {
@@ -15,8 +15,8 @@ export default class Circle extends Shape {
         ctx.save()
         this.updateContext(ctx)
         ctx.beginPath()
-        ctx.moveTo(this.x + this.radius, this.y)
-        ctx.arc(this.x, this.y, this.radius, 0, TWO_PI)
+        ctx.moveTo(this.radius, 0)
+        ctx.arc(0, 0, this.radius, 0, TWO_PI)
         ctx.closePath()
         this.isFill && ctx.fill()
         this.isStroke && ctx.stroke()

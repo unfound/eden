@@ -8,14 +8,14 @@ export default class Rect extends Shape {
         public height: number = 1,
         public radius: number = 0
     ) {
-        super()
+        super(x, y, width / 2, height / 2)
     }
 
     draw (ctx: CanvasRenderingContext2D) {
         if (!this.visable) return
         ctx.save()
         this.updateContext(ctx)
-        this.drawByPath(ctx, this.x, this.y, this.width, this.height, this.radius)
+        this.drawByPath(ctx, 0, 0, this.width, this.height, this.radius)
         ctx.restore()
     }
     // 不知道怎么设置圆弧

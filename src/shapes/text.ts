@@ -17,7 +17,7 @@ export default class Text extends Shape {
         public y: number,
         public maxWidth?: number
     ) {
-        super()
+        super(x, y, x, y)
         document.body.style.fontStyle
     }
 
@@ -26,8 +26,8 @@ export default class Text extends Shape {
         ctx.save()
         this.updateContext(ctx)
         this.updateTextContext(ctx)
-        this.isFill && ctx.fillText(this.value, this.x, this.y, this.maxWidth)
-        this.isStroke && ctx.strokeText(this.value, this.x, this.y, this.maxWidth)
+        this.isFill && ctx.fillText(this.value, 0, 0, this.maxWidth)
+        this.isStroke && ctx.strokeText(this.value, 0, 0, this.maxWidth)
         ctx.restore()
     }
 

@@ -90,6 +90,7 @@ export class Matrix {
 
   identity () {
     this.elements = Matrix.Identity.concat()
+    return this
   }
 
   multiply (scale: number): Matrix
