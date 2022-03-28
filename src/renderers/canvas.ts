@@ -29,7 +29,7 @@ export default class Renderer {
             el = document.createElement('canvas')
         }
         this.el = el as HTMLCanvasElement
-        this.overdraw = options.overdraw !== false
+        this.overdraw = options.overdraw || false
         this.smooting = options.smooting !== false
         this.ctx = this.el.getContext('2d')!
 
@@ -56,7 +56,8 @@ export default class Renderer {
 
     render (scene: Shape[]) {
         const isOne = this.radio === 1
-        if (isOne) {
+        // 这边的save和restore一定要同时执行，要不chrome会被撑爆
+        if (!isOne) {
             this.ctx.save()
             this.ctx.scale(this.radio, this.radio)
         }
