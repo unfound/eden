@@ -2,12 +2,17 @@ import './style.css'
 import Eden from './eden'
 import { PI } from './constants'
 import anime from 'animejs'
+import Stats from 'stats.js'
 
+const stats = new Stats()
+stats.showPanel(0)
+stats.dom.style.right = '0px'
+stats.dom.style.left = ''
+document.body.appendChild(stats.dom)
 const eden = new Eden({
   el: '#app',
   width: 800,
-  height: 400,
-  overdraw: false
+  height: 400
 })
 const rect1 = eden.rect(10, 10, 20, 20)
 rect1.strokeStyle = 'green'
@@ -53,5 +58,7 @@ anime({
     rotation += PI / 30
     rect2.rotate(rotation)
     eden.update()
+
+    stats.update()
   }
 })

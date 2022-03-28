@@ -3,18 +3,22 @@ lockfileVersion: 5.3
 specifiers:
   '@types/animejs': ^3.1.4
   '@types/lodash': ^4.14.180
+  '@types/stats.js': ^0.17.0
   animejs: ^3.2.1
   lodash: ^4.17.21
+  stats.js: ^0.17.0
   typescript: ^4.5.4
   vite: ^2.8.0
 
 dependencies:
   animejs: 3.2.1
   lodash: 4.17.21
+  stats.js: 0.17.0
 
 devDependencies:
   '@types/animejs': 3.1.4
   '@types/lodash': 4.14.180
+  '@types/stats.js': 0.17.0
   typescript: 4.6.2
   vite: 2.8.6
 
@@ -26,6 +30,10 @@ packages:
 
   /@types/lodash/4.14.180:
     resolution: {integrity: sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==}
+    dev: true
+
+  /@types/stats.js/0.17.0:
+    resolution: {integrity: sha512-9w+a7bR8PeB0dCT/HBULU2fMqf6BAzvKbxFboYhmDtDkKPiyXYbjoe2auwsXlEFI7CFNMF1dCv3dFH5Poy9R1w==}
     dev: true
 
   /animejs/3.2.1:
@@ -313,6 +321,10 @@ packages:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /stats.js/0.17.0:
+    resolution: {integrity: sha1-scPcRtlEmLV4t/05hbgaznExzH0=}
+    dev: false
 
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}

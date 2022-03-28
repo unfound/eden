@@ -10,11 +10,13 @@
   "devDependencies": {
     "@types/animejs": "^3.1.4",
     "@types/lodash": "^4.14.180",
+    "@types/stats.js": "^0.17.0",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   },
   "dependencies": {
     "animejs": "^3.2.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "stats.js": "^0.17.0"
   }
 }
